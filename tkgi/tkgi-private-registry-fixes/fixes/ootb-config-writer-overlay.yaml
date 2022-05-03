@@ -1,0 +1,34 @@
+#@ load("@ytt:overlay", "overlay")
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: patch-ootb-templates
+  namespace: tap-install
+stringData:
+  patch.yaml: |
+    #@ load("@ytt:overlay", "overlay")
+
+    #@ def inject_ca_cert(left, right):
+    #@ return left.replace("set -o xtrace", "set -o xtrace\n\ncat >/etc/ssl/certs/custom-ca.crt <<EOF\n" + right + "\nEOF")
+    #@ end
+
+    #@overlay/match by=overlay.subset({"kind":"ClusterTask","metadata":{"name":"image-writer"}})
+    ---
+    spec:
+      steps:
+      #@overlay/match by=overlay.all
+      -
+        #@overlay/replace via=inject_ca_cert
+        script: |
+                -----BEGIN CERTIFICATE-----
+                ....
+                -----END CERTIFICATE-----
+
+#@overlay/match by=overlay.subset({"kind":"PackageInstall","metadata":{"name":"ootb-templates"}})
+---
+metadata:
+  #@overlay/match missing_ok=True
+  annotations:
+    #@overlay/match missing_ok=True
+    ext.packaging.carvel.dev/ytt-paths-from-secret-name.0: patch-ootb-templates

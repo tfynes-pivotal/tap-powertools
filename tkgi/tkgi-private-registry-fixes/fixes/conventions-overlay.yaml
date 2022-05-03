@@ -1,0 +1,48 @@
+#@ load("@ytt:overlay", "overlay")
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: patch-convention-controller-ca-cert
+  namespace: tap-install
+stringData:
+  patch.yaml: |
+    #@ load("@ytt:overlay", "overlay")
+
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: ca-cert
+      namespace: conventions-system
+    data:
+      custom-ca.crt: |
+                -----BEGIN CERTIFICATE-----
+                .... 
+                -----END CERTIFICATE-----
+
+
+    #@overlay/match by=overlay.subset({"kind":"Deployment","metadata":{"name":"conventions-controller-manager"}})
+    ---
+    spec:
+      template:
+        spec:
+          containers:
+          #@overlay/match by=overlay.subset({"name": "manager"})
+          - volumeMounts:
+            #@overlay/append
+            - name: ca-cert
+              mountPath: /etc/ssl/certs/custom-ca.crt
+              subPath: custom-ca.crt
+          volumes:
+          #@overlay/append
+          - name: ca-cert
+            configMap:
+              name: ca-cert
+
+#@overlay/match by=overlay.subset({"kind":"PackageInstall","metadata":{"name":"conventions-controller"}})
+---
+metadata:
+  #@overlay/match missing_ok=True
+  annotations:
+    #@overlay/match missing_ok=True
+    ext.packaging.carvel.dev/ytt-paths-from-secret-name.0: patch-convention-controller-ca-cert
