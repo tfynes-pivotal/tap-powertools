@@ -10,4 +10,3 @@ spec:
       - Path=/**
     filters:
       - StripPrefix=1
-      - AddRequestHeader=Host,tdemo1
