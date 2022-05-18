@@ -1,0 +1,9 @@
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGateway
+metadata:
+  name: tdemo1-gateway
+spec:
+  api:
+    title: Tanzu Demo
+    version: 0.0.1
+

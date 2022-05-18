@@ -1,0 +1,1 @@
+tanzu apps workload create tdemo1 --git-repo https://github.com/tfynes-pivotal/tdemo1 --git-branch main --type web --annotation="autoscaling.knative.dev/minScale=1" --label="apps.kubernetes.io/part-of=tdemo1" -y

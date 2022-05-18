@@ -1,0 +1,13 @@
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGatewayRouteConfig
+metadata:
+  name: tdemo1-gateway-route
+spec:
+  service:
+    name: tdemo1
+  routes:
+  - predicates:
+      - Path=/**
+    filters:
+      - StripPrefix=1
+      - AddRequestHeader=Host,tdemo1
