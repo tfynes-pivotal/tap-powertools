@@ -9,4 +9,4 @@ spec:
   - predicates:
       - Path=/**
     filters:
-      - StripPrefix=1
+      - StripPrefix=0
