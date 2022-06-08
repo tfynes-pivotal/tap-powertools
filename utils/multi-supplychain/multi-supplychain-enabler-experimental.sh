@@ -1,5 +1,6 @@
 #!/bin/bash
-
+echo *** NO LONGER OPTIMAL APPROACH - USE MULTI-SUPPLYCHAIN-INSTALLER SCRIPT / OPTION ***
+echo *** NO NEED FOR UNIQUE SELECTOR ***
 echo
 echo TAP Multi-SupplyChain Enabler
 echo
