@@ -21,9 +21,27 @@ stringData:
       -
         #@overlay/replace via=inject_ca_cert
         script: |
-                -----BEGIN CERTIFICATE-----
-                ....
-                -----END CERTIFICATE-----
+                    -----BEGIN CERTIFICATE-----
+                    MIIDgDCCAmigAwIBAgIVAK9B4jDo/4HiN5htf9vWxl9GS3AfMA0GCSqGSIb3DQEB
+                    CwUAMB8xCzAJBgNVBAYTAlVTMRAwDgYDVQQKDAdQaXZvdGFsMB4XDTIyMDIwOTIy
+                    NTkzM1oXDTI0MDIxMDIyNTkzM1owPjELMAkGA1UEBhMCVVMxEDAOBgNVBAoMB1Bp
+                    dm90YWwxHTAbBgNVBAMMFDE5Mi4xNjkuMy4yMDAubmlwLmlvMIIBIjANBgkqhkiG
+                    9w0BAQEFAAOCAQ8AMIIBCgKCAQEApDMCNoNbnKBlxSPRuI07ONJzcLNUuF5Wekj+
+                    xhp2I748NjggX97bBRK454SSrmaZcA7Nx2JvQU9RLd126q92IJXCd7jG7FPD+6N6
+                    Yer2jSSu0zAbJzse4Jsd7+PwY6j7xGSmjy/c4vHpgfZ7RbVTZF+REL64q0rW4/fq
+                    rUsLQZPDHBvVpREJQIwMhVanBshSN2QydWG/gIQrNACzZTtDivFy5tRLJYCpYgz5
+                    QJ4QOKllqx2tUOQIliWB0gduWp88xS6VXTsXbezl+Y3yizSwUbegMn36qhxFhg1Y
+                    iOJkz9VDQFn/rsIUqPCbNnk6WAXAHxWUO0d/o8aBzRaLhIOwVwIDAQABo4GTMIGQ
+                    MB0GA1UdDgQWBBRDUKSeYbI2bz4x5hNLzReDzUhwkDAfBgNVHSMEGDAWgBRW11WL
+                    7qGoQT/0Bm3AX7dGJtyU2DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEw
+                    DgYDVR0PAQH/BAQDAgeAMB8GA1UdEQQYMBaCFDE5Mi4xNjkuMy4yMDAubmlwLmlv
+                    MA0GCSqGSIb3DQEBCwUAA4IBAQAUdA0uE/9xaD9IMBjPz4Wlm6wYd8qS9mj0skVJ
+                    /f9wTu1ndiCk/G21jrg/ORAlwX8rdLI0aalcORhzMxfCQq4RroJZTpKDMb2U7MoH
+                    yHALMOY7eXqZKdkCfqyl0p/gUXRGLUDaKqI7botIpsCyUCR7HwbKBEdjMM3ylWee
+                    wMjYFDQjKysbN6D7RgpPS1H58t7TQVeOHqObZl/XOzBmZyMso7mTis7xuuKbVSzD
+                    piXUhZfPlbgeHysy0iyug+StttuCYX28LhSxMcRIKWytZQT1hp0ej07THCi7fLaJ
+                    HpgVnpRVUraH2lL7XAewZMZDgi36TBCx6MFEz+KbRtaXrQXZ
+                    -----END CERTIFICATE-----
 
 #@overlay/match by=overlay.subset({"kind":"PackageInstall","metadata":{"name":"ootb-templates"}})
 ---
