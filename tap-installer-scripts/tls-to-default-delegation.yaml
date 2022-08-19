@@ -1,0 +1,11 @@
+apiVersion: projectcontour.io/v1
+kind: TLSCertificateDelegation
+metadata:
+  name: domain-delegation
+  namespace: tanzu-system-ingress
+spec:
+  delegations:
+    - secretName: tapfynesycom
+      targetNamespaces:
+      - "*"
+

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export TAP_VERSION='1.2.0-build.13'
+export TAP_VERSION='1.2.1'
 
 kubectl create ns tap-install
 
