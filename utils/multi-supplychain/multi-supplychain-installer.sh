@@ -8,13 +8,13 @@
 
 # Install and configure "Testing" supply chain
 kubectl -n tap-install get secret ootb-supply-chain-basic-values -o jsonpath="{.data.values\.yml}" | base64 -d - > /tmp/values.yaml
-tanzu -n tap-install package install ootb-supply-chain-testing  -p ootb-supply-chain-testing.tanzu.vmware.com  -v 0.7.0 --values-file /tmp/values.yaml
+tanzu -n tap-install package install ootb-supply-chain-testing  -p ootb-supply-chain-testing.tanzu.vmware.com  -v 0.10.2 --values-file /tmp/values.yaml
 rm /tmp/values.yaml
 
 
 # Install and configure "Testing and Scanning" supply chain - adds 3rd required selector "apps.tanzu.vmware.com/scan-workload":"true"
 kubectl -n tap-install get secret ootb-supply-chain-basic-values -o jsonpath="{.data.values\.yml}" | base64 -d - > /tmp/values.yaml
-tanzu -n tap-install package install ootb-supply-chain-testing-scanning -p ootb-supply-chain-testing-scanning.tanzu.vmware.com -v 0.7.0 --values-file /tmp/values.yaml
+tanzu -n tap-install package install ootb-supply-chain-testing-scanning -p ootb-supply-chain-testing-scanning.tanzu.vmware.com -v 0.10.2 --values-file /tmp/values.yaml
 rm /tmp/values.yaml
 
 
