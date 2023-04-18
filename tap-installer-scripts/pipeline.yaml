@@ -25,5 +25,6 @@ spec:
             script: |-
               cd `mktemp -d`
 
-              wget -qO- $(params.source-url) | tar xvz
-              ./mvnw test
+              wget -qO- $(params.source-url) | tar mxvz
+
+              ./mvnw -e test
