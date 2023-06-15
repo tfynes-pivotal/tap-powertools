@@ -1,0 +1,55 @@
+bash_setup() {
+    cat <<SETUP
+alias kctx='. $(readlink -f "$0")'
+__kctx () { mapfile -t COMPREPLY < <(compgen -W "\$(kubectl config get-contexts -o name) --help --unset" -- "\${COMP_WORDS[1]}"); }
+complete -F __kctx kctx
+SETUP
+}
+
+usage() {
+  cat <<EOF
+usage: kctx [option] context
+  -h, --help     show this message
+  -u, --unset    back to global context
+EOF
+}
+
+set_context_env() {
+    local -r context=$1
+    [[ -z $context ]] && { usage >&2; return 1; }
+
+    kubectl config get-contexts "$context" >/dev/null || return
+
+    cache=${XDG_CACHE_HOME:-$HOME/.cache}/kctx
+    mkdir -p "$cache"
+
+    export KUBECONFIG
+    : "${KUBECONFIG:=$HOME/.kube/config}"
+    context_config="$cache/${context}.yaml"
+
+    if [[ ! -f $context_config ]]
+    then
+        cat >"$context_config" <<CONF
+apiVersion: v1
+kind: Config
+current-context: $context
+CONF
+        chmod -w "$context_config"  # Prevent overwrites by kubectx etc.
+    fi
+
+    KUBECONFIG="$context_config:${KUBECONFIG/$cache\/*.yaml:}"
+}
+
+case $1 in
+    -h|--help)
+        usage
+        ;;
+    --bash-config)
+        bash_setup
+        ;;
+    -u|--unset)
+        KUBECONFIG="${KUBECONFIG/$cache\/*.yaml:}"
+        ;;
+    *)
+        set_context_env "$1"
+esac
